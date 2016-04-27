@@ -1,10 +1,21 @@
 class SongsController < ApplicationController
+
   def index
-    @songs = Song.all
+    if Artist.find_by_id(params[:artist_id]).nil?
+      flash[:notice] = "Artist not found"
+      redirect_to artists_path
+
+    else
+      @songs = Artist.find(params[:artist_id]).songs
+    end
   end
 
   def show
-    @song = Song.find(params[:id])
+    if params[:artist_id]
+      @song = Artist.find(params[:artist_id]).songs.find(params[:id])
+    else
+      @song = Song.find(params[:id])
+    end
   end
 
   def new
