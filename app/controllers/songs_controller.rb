@@ -13,7 +13,6 @@ class SongsController < ApplicationController
   end
 
   def show
-    # binding.pry
     if params[:artist_id]
       begin
         @artist = Artist.find(params[:artist_id])
