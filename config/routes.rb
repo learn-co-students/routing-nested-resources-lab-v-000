@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   end
   resources :songs
 
+  root 'songs#index'
+
 end
