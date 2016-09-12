@@ -50,3 +50,6 @@ class ArtistsController < ApplicationController
     params.require(:artist).permit(:name)
   end
 end
+
+# artist_songs GET  /artists/:artist_id/songs    songs#index
+#  artist_song GET  /artists/:artist_id/songs/:id songs#show
