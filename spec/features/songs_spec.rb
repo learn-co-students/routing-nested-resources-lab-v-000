@@ -1,3 +1,4 @@
+require 'helpers/artists_helper_spec'
 describe "songs", type:  :feature do
 
   before do
