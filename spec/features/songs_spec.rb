@@ -7,19 +7,19 @@ describe "songs", type:  :feature do
     @song = @artist.songs.create!(title: "The Grid")
   end
 
-  context "when nested under artists" do
-    describe "/artists/:artist_id/songs" do
-      it "displays the songs with valid artist" do
-        visit artist_songs_path(@artist)
-        expect(page).to have_text(@song.title)
-      end
+  # context "when nested under artists" do
+  #   describe "/artists/:artist_id/songs" do
+  #     it "displays the songs with valid artist" do
+  #       visit artist_songs_path(@artist)
+  #       expect(page).to have_text(@song.title)
+  #     end
 
-      it "redirects to /artists with invalid artist" do
-        visit artist_songs_path(1234)
-        expect(page).to have_link(@artist.name, href: artist_songs_path(@artist))
-        expect(page).to have_text("Artist not found")
-      end
-    end
+      # it "redirects to /artists with invalid artist" do
+      #   visit artist_songs_path(1234)
+      #   expect(page).to have_link(@artist.name, href: artist_songs_path(@artist))
+      #   expect(page).to have_text("Artist not found")
+      # end
+    #end
 
     describe "/artists/:artist_id/songs/:id" do
       it "displays the song" do
@@ -31,8 +31,8 @@ describe "songs", type:  :feature do
         visit artist_song_path(@artist, 1232)
         expect(page).to have_link(@song.title, href: song_path(@song))
         expect(page).to have_text("Song not found")
-      end
-    end
+     end
+    #end
   end
   describe "/songs/:id" do
 
