@@ -1,6 +1,5 @@
 class SongsController < ApplicationController
   def index
-<<<<<<< HEAD
     if params[:artist_id]
       if (Artist.find(params[:artist_id]) rescue nil) == nil
         flash[:alert] = "Artist not found"
@@ -21,13 +20,6 @@ class SongsController < ApplicationController
     else
       @song = Song.find(params[:id])
     end
-=======
-    @songs = Song.all
-  end
-
-  def show
-    @song = Song.find(params[:id])
->>>>>>> 60f92d6495cfaaf6c144bf137258bd9b693bbaaf
   end
 
   def new
@@ -73,7 +65,3 @@ class SongsController < ApplicationController
     params.require(:song).permit(:title, :artist_name)
   end
 end
-<<<<<<< HEAD
-=======
-
->>>>>>> 60f92d6495cfaaf6c144bf137258bd9b693bbaaf
