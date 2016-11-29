@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
+<<<<<<< HEAD
 gem 'pry'
+=======
+>>>>>>> 60f92d6495cfaaf6c144bf137258bd9b693bbaaf
 gem 'rails', '4.2.5'
 gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
@@ -18,3 +21,7 @@ end
 group :development do
   gem 'web-console', '~> 2.0'
 end
+<<<<<<< HEAD
+=======
+
+>>>>>>> 60f92d6495cfaaf6c144bf137258bd9b693bbaaf
