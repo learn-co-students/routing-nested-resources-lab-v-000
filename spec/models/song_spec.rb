@@ -25,4 +25,9 @@ RSpec.describe Song, type: :model do
     expect(song.artist_name).to eq "Daft Punk"
     expect(Artist.all.count).to eq 1
   end
+
+  after do
+    Artist.destroy_all
+    Song.destroy_all
+  end
 end
