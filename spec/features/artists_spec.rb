@@ -21,4 +21,9 @@ describe "artists", type: :feature do
       expect(page).to have_link(@song.title, href: artist_song_path(@artist, @song))
     end
   end
+
+  after do
+    Artist.destroy_all
+    Song.destroy_all
+  end
 end

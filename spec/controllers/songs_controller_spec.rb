@@ -42,4 +42,8 @@ RSpec.describe SongsController do
     end
   end
 
+  after do
+    Artist.destroy_all
+    Song.destroy_all
+  end
 end
