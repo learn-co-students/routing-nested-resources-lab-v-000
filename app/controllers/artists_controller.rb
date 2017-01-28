@@ -1,10 +1,19 @@
 class ArtistsController < ApplicationController
   def index
+    binding.pry
+    if params[:invalid_artist]
+      @invalid_artist = true
+    else
     @artists = Artist.all
+  end
   end
 
   def show
-    @artist = Artist.find(params[:id])
+    if Artist.find(params[:id])
+      @artist = Artist.find(params[:id])
+    else
+      @no_artist = true
+    end
   end
 
   def new

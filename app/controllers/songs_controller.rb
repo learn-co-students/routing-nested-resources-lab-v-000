@@ -3,7 +3,8 @@ class SongsController < ApplicationController
   def index
     if params[:artist_id]
       if !Artist.find_by(id: params[:artist_id])
-        redirect_to artists_path
+        @invalid_artist = true
+        redirect_to artists_url
       else
         @songs = Artist.find(params[:artist_id]).songs
       end
