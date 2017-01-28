@@ -1,10 +1,13 @@
 class ArtistsController < ApplicationController
   def index
+    if flash[:notice]
+      @invalid_artist = true
+    end
     @artists = Artist.all
   end
 
   def show
-    @artist = Artist.find(params[:id])
+      @artist = Artist.find(params[:id])
   end
 
   def new
