@@ -1,14 +1,26 @@
 class SongsController < ApplicationController
+require 'rack-flash'
+use Rack::Flash
+
   def index
     if params[:artist_id]
-      @songs = Artist.find(params[:artist_id]).songs
+      if Artist.find_by(id: params[:artist_id])
+         @songs = Artist.find(params[:artist_id]).songs
+      else
+        flash[:message] = "Artist not found"
+        redirect_to artists_path
+      end
     else
       @songs = Song.all
     end
   end
 
   def show
-    @song = Song.find(params[:id])
+    if Song.find_by(id: params[:id])
+      @song = Song.find(params[:id])
+    else
+      redirect_to artist_songs_path(params[:artist_id]), alert: "Song not found"
+    end
   end
 
   def new

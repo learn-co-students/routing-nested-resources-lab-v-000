@@ -1,4 +1,8 @@
 class ArtistsController < ApplicationController
+  require 'rack-flash'
+  use Rack::Flash
+
+
   def index
     @artists = Artist.all
   end
