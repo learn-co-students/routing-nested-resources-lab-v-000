@@ -16,6 +16,7 @@ RSpec.describe SongsController do
       expect(response).to redirect_to artists_path
     end
 
+
     it 'returns 200 when just index with no artist_id' do
       get :index
       expect(response).to be_ok
