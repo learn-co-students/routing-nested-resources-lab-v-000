@@ -1,10 +1,12 @@
 class ArtistsController < ApplicationController
-  def index
+  def index #/artists
     @artists = Artist.all
   end
 
-  def show
-    redirect_to artists_path if !(@artist = Artist.find_by(id: params[:id]))
+  #/artists/1
+  #/artist/asdf -> redirect to /artist
+  def show 
+    redirect_to artists_path, alert: 'Artist not found' if !(@artist = Artist.find_by(id: params[:id]))
   end
 
   def new
