@@ -4,10 +4,12 @@ class ArtistsController < ApplicationController
   end
 
   def show
+    #raise params.inspect
     @artist = Artist.find(params[:id])
   end
 
   def new
+
     @artist = Artist.new
   end
 
@@ -15,7 +17,7 @@ class ArtistsController < ApplicationController
     @artist = Artist.new(artist_params)
 
     if @artist.save
-      redirect_to @artist
+      redirect_to @artist    
     else
       render :new
     end
