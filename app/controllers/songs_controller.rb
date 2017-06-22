@@ -1,10 +1,26 @@
+require 'pry'
 class SongsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :dude_wheres_my_record
+
   def index
-    @songs = Song.all
+    if params[:artist_id]
+      @songs = Artist.find(params[:artist_id]).songs
+    else
+      @songs = Song.all
+    end
   end
 
   def show
-    @song = Song.find(params[:id])
+    if params[:artist_id]
+      @artist = Artist.find(params[:artist_id])
+      @song = @artist.songs.find_by(id: params[:id])
+      if @song.nil?
+        flash[:alert] = "Song not found."
+        redirect_to artist_songs_path(@artist)  
+      end
+    else
+      @song = Song.find(params[:id])
+    end
   end
 
   def new
@@ -44,10 +60,14 @@ class SongsController < ApplicationController
     redirect_to songs_path
   end
 
+  def dude_wheres_my_record
+    flash[:alert] = "Artist not found."
+    redirect_to artists_path
+  end
+
   private
 
   def song_params
     params.require(:song).permit(:title, :artist_name)
   end
 end
-
