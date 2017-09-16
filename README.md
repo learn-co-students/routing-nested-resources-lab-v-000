@@ -30,7 +30,6 @@ Remember to `rake db:seed` to set up a starter song library!
 `flash[:alert]` of "Song not found."
 7. Make sure all tests pass; then, party down!
 
-![Party Down](http://i.giphy.com/l41lNRz0uXPQLm0RG.gif)
 
 **Hints**
 
