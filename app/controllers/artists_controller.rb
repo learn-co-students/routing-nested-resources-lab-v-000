@@ -44,7 +44,7 @@ class ArtistsController < ApplicationController
     redirect_to artists_path
   end
 
-  private
+  private  
 
   def artist_params
     params.require(:artist).permit(:name)
