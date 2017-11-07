@@ -5,9 +5,8 @@ class ArtistsController < ApplicationController
 
   def show
     @artist = Artist.find_by(id: params[:id])
-    if @artist == nil
-      flash[:notice] = "The artist could not be found."
-      redirect_to artists_path
+    if @artist.nil?
+      redirect_to artists_path, alert: "The artist could not be found."
     end
   end
 
@@ -44,8 +43,7 @@ class ArtistsController < ApplicationController
   def destroy
     @artist = Artist.find(params[:id])
     @artist.destroy
-    flash[:notice] = "Artist deleted."
-    redirect_to artists_path
+    redirect_to artists_path, alert: "Artist deleted."
   end
 
   private

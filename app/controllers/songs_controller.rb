@@ -5,8 +5,7 @@ class SongsController < ApplicationController
       if @artist
         @songs = @artist.songs
       else
-        flash[:notice] = "Artist not found"
-        redirect_to artists_path
+        redirect_to artists_path, alert: "Artist not found"
       end
     else
       @songs = Song.all
@@ -20,18 +19,15 @@ class SongsController < ApplicationController
         if @artist.song_ids.include?(params[:id].to_i) #the song belongs to the artist
           @song = Song.find_by(id: params[:id])
         else #the song does not belong to the artist
-          flash[:alert] = "Song not found"
-          redirect_to artist_songs_path(@artist)
+          redirect_to artist_songs_path(@artist), alert: "Song not found"
         end
       else #the artist id was not found in the db.
-        flash[:alert] = "The artist was not found."
-        redirect_to songs_path
+        redirect_to songs_path, alert: "Artist not found"
       end
     else #the artist_id is not included in the url. just straight /songs/2
       @song = Song.find_by(id: params[:id])
-      if @song == nil #the song_id does not exist in the db.
-        flash[:alert] = "The song could not be found in the library."
-        redirect_to songs_path
+      if @song.nil? #the song_id does not exist in the db.
+        redirect_to songs_path, alert: "The song could not be found in the library."
       end
     end
   end
