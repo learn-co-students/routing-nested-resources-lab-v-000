@@ -1,10 +1,35 @@
 class SongsController < ApplicationController
   def index
-    @songs = Song.all
+    if params[:artist_id] #user puts in artists/1/songs
+      @artist = Artist.find_by(id: params[:artist_id])
+      if @artist
+        @songs = @artist.songs
+      else
+        redirect_to artists_path, alert: "Artist not found"
+      end
+    else
+      @songs = Song.all
+    end
   end
 
   def show
-    @song = Song.find(params[:id])
+    if params[:artist_id] #the artist_id is included in the url
+      @artist = Artist.find_by(id: params[:artist_id])
+      if @artist #the artist_id actually exists in db
+        if @artist.song_ids.include?(params[:id].to_i) #the song belongs to the artist
+          @song = Song.find_by(id: params[:id])
+        else #the song does not belong to the artist
+          redirect_to artist_songs_path(@artist), alert: "Song not found"
+        end
+      else #the artist id was not found in the db.
+        redirect_to songs_path, alert: "Artist not found"
+      end
+    else #the artist_id is not included in the url. just straight /songs/2
+      @song = Song.find_by(id: params[:id])
+      if @song.nil? #the song_id does not exist in the db.
+        redirect_to songs_path, alert: "The song could not be found in the library."
+      end
+    end
   end
 
   def new
@@ -50,4 +75,3 @@ class SongsController < ApplicationController
     params.require(:song).permit(:title, :artist_name)
   end
 end
-
