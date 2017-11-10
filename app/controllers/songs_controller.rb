@@ -1,6 +1,6 @@
 class SongsController < ApplicationController
   def index
-    @songs = Song.all
+    set_songs 
   end
 
   def show
@@ -49,5 +49,17 @@ class SongsController < ApplicationController
   def song_params
     params.require(:song).permit(:title, :artist_name)
   end
-end
 
+  def set_songs
+    if params[:artist_id].present?
+      artist = Artist.find_by(id: params[:artist_id])
+      if artist == nil
+        redirect_to artists_path
+      else
+        @songs = artist.songs
+      end
+    else
+      @songs = Song.all
+    end
+  end
+end
