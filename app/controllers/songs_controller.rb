@@ -54,13 +54,9 @@ class SongsController < ApplicationController
   end
 
   def set_songs
-    #if !params[:artist_id].present?
-    #  @songs = Song.all
-  #  else
-      params[:artist_id].present? ? @songs = Artist.find(params[:artist_id]).songs : @songs = Song.all
-      rescue ActiveRecord::RecordNotFound
-        flash[:alert] = "Artist not found."
-        redirect_to artists_path
-  #  end
+    params[:artist_id].present? ? @songs = Artist.find(params[:artist_id]).songs : @songs = Song.all
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "Artist not found."
+      redirect_to artists_path
   end
 end
