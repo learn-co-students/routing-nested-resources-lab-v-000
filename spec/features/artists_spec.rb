@@ -2,7 +2,7 @@ describe "artists", type: :feature do
 
   before do
     Artist.destroy_all
-    binding.pry
+    #binding.pry
     Song.destroy_all
     @artist = Artist.create!(name: "Daft Punk")
     @song = @artist.songs.create!(title: "The Grid")
@@ -10,7 +10,7 @@ describe "artists", type: :feature do
 
   describe "GET /artists" do
     it "links to artists songs path" do
-      binding.pry
+      #binding.pry
       visit artists_path
       expect(page).to have_link(@artist.name, href: artist_songs_path(@artist))
     end
