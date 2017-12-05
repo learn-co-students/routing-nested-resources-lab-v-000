@@ -1,3 +1,5 @@
+require_relative '../rails_helper'
+
 describe "artists", type: :feature do
 
   before do
