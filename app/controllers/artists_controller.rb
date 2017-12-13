@@ -3,8 +3,9 @@ class ArtistsController < ApplicationController
     @artists = Artist.all
   end
 
-  def show
-    @artist = Artist.find(params[:id])
+  def show #shows an artist and his songs with link to artist_song_paht(@artist, @song)
+    @artist = Artist.find_by(id: params[:id])
+    @songs = @artist.songs
   end
 
   def new
