@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :songs
 
-  root 'songs#index'
+  #root 'songs#index' #did not need this to pass tests
   # resources :artists
   # resources :songs
 end

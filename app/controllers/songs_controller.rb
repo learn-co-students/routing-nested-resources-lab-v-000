@@ -2,10 +2,13 @@ class SongsController < ApplicationController
 
   def index
     if params[:artist_id]
-      if artist = Artist.find_by(id: params[:artist_id])
+      if artist = Artist.find_by(id: params[:artist_id]) #inherant in this is the test: is there an :artist_id
+                                                        # params -- ie, did we get the long url. Same with
+                                                        #first line under #show
         @songs = artist.songs
-        redirect_to 'songs/index'
+        #redirect_to 'songs/index' # don't need this b/c rails automatically handles the direction of #index
       else
+        flash[:alert] = "Artist not found"
         @artists = Artist.all # @songs = Song.all
         redirect_to artists_path
       end
@@ -23,13 +26,15 @@ class SongsController < ApplicationController
       if !Song.find_by(id: params[:id])
         flash[:alert] = "Song not found!"
         redirect_to artist_songs_path
+      else
+        @song = Song.find_by(id: params[:id])
       end
-
+    else
     # binding.pry
     # if artist = Artist.find_by(id: params[:artist_id])
     #   @song = Song.find_by(id: params[:id])
     #   redirect_to 'songs/show'
-    else
+
       @song = Song.find_by(id: params[:id])
     end
 
