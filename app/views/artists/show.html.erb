@@ -1,6 +1,12 @@
+<% if flash[:alert] %>
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, class: name %>
+  <% end %>
+<% end %>
+
 <h1><%= @artist.name %></h1>
 <ul>
   <% @artist.songs.each do |song| %>
-    <li><%= song.title %></li>
+    <li><%= link_to song.title, artist_song_path(@artist.id, song.id) %></li>
   <% end %>
 </ul>
