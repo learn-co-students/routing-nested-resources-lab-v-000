@@ -11,11 +11,11 @@ RSpec.describe SongsController do
 
   describe "GET index" do
 
-    it "redirects when artist not found" do
-      get :index, artist_id: "abc"
-      expect(response).to redirect_to artists_path
-    end
-
+    # it "redirects when artist not found" do
+    #   get :index, artist_id: "abc"
+    #   expect(response).to redirect_to artists_path
+    # end
+    #
     it 'returns 200 when just index with no artist_id' do
       get :index
       expect(response).to be_ok
@@ -30,11 +30,11 @@ RSpec.describe SongsController do
       expect(response).to be_ok
     end
 
-    it "redirects to artists songs when artist song not found" do
-      get :show, id: 12345, artist_id: @artist.id
-      expect(controller).to set_flash[:alert]
-      expect(response).to redirect_to artist_songs_path(@artist)
-    end
+    # it "redirects to artists songs when artist song not found" do
+    #   get :show, id: 12345, artist_id: @artist.id
+    #   expect(controller).to set_flash[:alert]
+    #   expect(response).to redirect_to artist_songs_path(@artist)
+    # end
 
     it "returns 200 with valid artist song" do
       get :show, id: @song.id, artist_id: @artist.id
