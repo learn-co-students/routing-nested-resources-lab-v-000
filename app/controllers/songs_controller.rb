@@ -1,4 +1,5 @@
 class SongsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :missing_record
   def index
     if params[:artist_id]
       @songs = Artist.find(params[:artist_id]).songs
