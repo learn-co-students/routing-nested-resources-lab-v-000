@@ -49,6 +49,11 @@ class SongsController < ApplicationController
     redirect_to songs_path
   end
 
+  def missing_record
+    flash[:alert] = "Artist not found."
+    redirect_to artists_path
+  end
+  
   private
 
   def song_params
