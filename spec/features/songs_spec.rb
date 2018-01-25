@@ -16,6 +16,7 @@ describe "songs", type:  :feature do
 
       it "redirects to /artists with invalid artist" do
         visit artist_songs_path(1234)
+        save_and_open_page
         expect(page).to have_link(@artist.name, href: artist_songs_path(@artist))
         expect(page).to have_text("Artist not found")
       end
