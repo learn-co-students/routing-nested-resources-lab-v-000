@@ -12,6 +12,7 @@ group :development, :test do
   gem 'capybara'
   gem 'rspec-rails'
   gem 'shoulda'
+      gem 'tzinfo-data', platform: [:mingw, :mswin, :x64_mingw]
 end
 
 group :development do
