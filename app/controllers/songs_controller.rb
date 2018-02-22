@@ -1,12 +1,60 @@
 class SongsController < ApplicationController
+  
   def index
-    @songs = Song.all
+    if params[:artist_id]
+      @artist = Artist.find_by_id(params[:artist_id])
+      
+      if @artist.nil?
+        flash[:alert] =  "Artist not found"
+        redirect_to artists_path
+       
+      else 
+        @songs = @artist.songs
+      end 
+    else
+      @songs = Song.all
+    end
+  end
+# find(params)-- defaults to id/  find_by(.. .=> looks for the column name or id )
+
+  # def show
+  #   if params[:artist_id]
+  #     binding.pry
+  #     @artist = Artist.find_by_id(params[:artist_id])
+  #     @song = @artist.songs.find_by(id: params[:id]) 
+  #       if @song.nil? 
+      
+  #       else 
+  #          flash[:alert] =  "Song not found"
+  #          redirect_to to artist_songs_path(@artist)
+  #        end 
+ 
+  #   else
+  #     @song = Song.find_by(params[:id])
+  #   end
+  # end
+
+# find_by fails silently. Creepy default, will return something. 
+
+ def show
+    if params[:artist_id]
+      @artist = Artist.find_by_id(params[:artist_id])
+     
+      if !@artist.nil?
+         @song = @artist.songs.find_by(:id => params[:id])
+
+         if @song.nil? 
+            # redirect_to artist_song_path(@artist, @song)
+           flash[:alert] =  "Song not found"
+           redirect_to artist_songs_path(@artist)
+         end 
+      end
+    else
+      @song = Song.find_by(:id => params[:id])
+    end
   end
 
-  def show
-    @song = Song.find(params[:id])
-  end
-
+# artist yes, song no 
   def new
     @song = Song.new
   end
