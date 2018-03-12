@@ -1,7 +1,12 @@
 class SongsController < ApplicationController
   def index  #updated with our nested resources to allow relationship linking
     if params[:artist_id]
-        @songs = Artist.find(params[:artist_id]).songs
+        @artist = Artist.find_by(id: params[artist_id])
+        if @artist.nil?
+            redirect_to artists_path, alert: "Artist not found"
+        else
+            @songs = @artist.songs
+        end
     else
         @songs = Song.all
     end
