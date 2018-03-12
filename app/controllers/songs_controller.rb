@@ -1,9 +1,14 @@
 class SongsController < ApplicationController
-  def index
-    @songs = Song.all
+  def index  #updated with our nested resources to allow relationship linking
+    if params[:artist_id]
+        @songs = Artist.find(params[:artist_id]).songs
+    else
+        @songs = Song.all
+    end
+
   end
 
-  def show
+  def show  #does not need to be updated with our nested resources to allow relationship linking to work
     @song = Song.find(params[:id])
   end
 
@@ -50,4 +55,3 @@ class SongsController < ApplicationController
     params.require(:song).permit(:title, :artist_name)
   end
 end
-
