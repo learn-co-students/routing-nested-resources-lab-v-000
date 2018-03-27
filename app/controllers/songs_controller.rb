@@ -1,13 +1,11 @@
-require 'pry'
-
 class SongsController < ApplicationController
   def index
     if params[:artist_id]
-      if Artist.find_by(id: params[:artist_id]) == nil
-        flash[:alert] = "Artist not found"
-        redirect_to '/artists'
+      @artist = Artist.find_by(id: params[:artist_id])
+      if  @artist == nil
+        redirect_to artists_path, alert: "Artist not found"
       else
-        @songs = Artist.find(params[:artist_id]).songs
+        @songs = @artist.songs
       end
     else
       @songs = Song.all
@@ -15,12 +13,14 @@ class SongsController < ApplicationController
   end
 
   def show
-    if Song.find_by(id: params[:id]) == nil
-      flash[:alert] = "Song not found"
-      @artist = Artist.find(params[:artist_id])
-      redirect_to "/artists/#{@artist.id}/songs"
+    if params[:artist_id]
+      @artist = Artist.find_by(id: params[:artist_id])
+      @song = @artist.songs.find_by(id: params[:id])
+      if @song == nil
+        redirect_to artist_songs_path(@artist), alert: "Song not found"
+      end
     else
-      @song = Song.find_by(id: params[:id])
+        @song = Song.find(params[:id])
     end
   end
 
