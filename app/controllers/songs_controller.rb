@@ -1,6 +1,11 @@
 class SongsController < ApplicationController
   def index
-    @songs = Song.all
+    @songs = if params.key?(:artist_id)
+               Song.filtered_songs(params[:artist_id])
+             else
+               Song.all
+             end
+    redirect_to artists_path if @songs.empty?
   end
 
   def show
