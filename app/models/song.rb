@@ -1,8 +1,12 @@
 class Song < ActiveRecord::Base
   belongs_to :artist
 
+  def self.filtered_songs(artist_id)
+    where('artist_id = (?)', artist_id)
+  end
+
   def artist_name
-    self.try(:artist).try(:name)
+    try(:artist).try(:name)
   end
 
   def artist_name=(name)
