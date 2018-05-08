@@ -1,10 +1,15 @@
 class ArtistsController < ApplicationController
   def index
+    #binding.pry
     @artists = Artist.all
   end
 
   def show
+    #binding.pry
     @artist = Artist.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:notice] = 'Artist not found'
+      redirect_to artists_path
   end
 
   def new
