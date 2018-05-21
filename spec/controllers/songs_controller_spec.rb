@@ -20,7 +20,6 @@ RSpec.describe SongsController do
       get :index
       expect(response).to be_ok
     end
-
   end
 
   describe "GET show with  artist" do
