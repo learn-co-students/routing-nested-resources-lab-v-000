@@ -1,10 +1,32 @@
 class SongsController < ApplicationController
+
   def index
-    @songs = Song.all
+    if params[:artist_id]
+      @artist = Artist.find_by(id: params[:artist_id])
+      #@artist = Artist.find_by_id(params[:artist_id]) works too
+      #@artist = Artist.find(params[:artist_id]) does not work because it assumes there is definitely an object with that ID so it will raise an exception if it is not found whereas find_by will return nil if it is not found
+      if @artist.present?
+        @songs = @artist.songs
+      else
+        redirect_to artists_path, alert: "Artist not found."
+      end
+    else
+      @songs = Song.all
+    end
   end
 
   def show
-    @song = Song.find(params[:id])
+    if params[:artist_id]
+      @artist = Artist.find_by(id: params[:artist_id])
+      @song = @artist.songs.find_by(id: params[:id])
+      if @song.present?
+        @songs = @artist.songs
+      else
+        redirect_to artist_songs_path, alert: "Song not found."
+      end
+    else
+      @song = Song.find_by(id: params[:id])
+    end
   end
 
   def new
