@@ -10,3 +10,14 @@ class Song < ActiveRecord::Base
     self.artist = artist
   end
 end
+
+# rspec spec/models/song_spec.rb
+# rspec spec/controllers/songs_controller_spec.rb
+# rspec spec/features/songs_spec.rb   <<-- WIP
+# rspec spec/views/songs/index.html.erb_spec.rb
+# rspec spec/views/songs/show.html.erb_spec.rb
+
+# rspec spec/controllers/artists_controller_spec.rb
+# rspec spec/features/artists_spec.rb    <<-- WIP
+# rspec spec/helpers/artists_helper_spec.rb
+# rspec spec/routing/artists_routing_spec.rb
