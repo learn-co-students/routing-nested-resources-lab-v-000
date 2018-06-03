@@ -1,10 +1,25 @@
 class SongsController < ApplicationController
   def index
     @songs = Song.all
+    if params[:artist_id]
+     @artist = Artist.find_by(id: params[:artist_id]) 
+     if !@artist
+        redirect_to artists_path
+     end
+    end
   end
 
   def show
     @song = Song.find(params[:id])
+
+    # if params[:artist_id]
+    #   @artist = Artist.find_by(id: params[:artist_id])
+    #   @song = @artist.songs.find_by(id: params[:id])
+      
+    # #  if @artist
+        # artist_songs_path
+    #  end
+    # end
   end
 
   def new
