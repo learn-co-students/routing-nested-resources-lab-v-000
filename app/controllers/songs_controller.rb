@@ -1,37 +1,40 @@
 class SongsController < ApplicationController
   def index
-    @songs = Song.all
+    @songs = Artist.find(params[:artist_id]).songs
   end
 
+
   def show
-    @song = Song.find(params[:id])
+    @artist = Artist.find_by(id: params[:artist_id]) 
+    @song = Song.find_by(id: params[:id]) 
   end
 
   def new
     @song = Song.new
+    @artist = Artist.find_by(id: params[:artist_id]);
   end
 
   def create
-    @song = Song.new(song_params)
-
+    @artist = Artist.find_by(id: params[:artist_id]); 
+    @song = @artist.songs.build(song_params)
     if @song.save
-      redirect_to @song
+      redirect_to artist_songs_path(@artist)
     else
       render :new
     end
   end
 
   def edit
-    @song = Song.find(params[:id])
+    @song = Song.find_by(params[:id])
+    @artist = Artist.create!
   end
 
   def update
     @song = Song.find(params[:id])
-
     @song.update(song_params)
 
     if @song.save
-      redirect_to @song
+      redirect_to artist_song_path(@artist,@song)
     else
       render :edit
     end
