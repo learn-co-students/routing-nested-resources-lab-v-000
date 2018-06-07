@@ -1,4 +1,12 @@
-<h1><%= link_to @artist.name, artist_song_path(@song.artist, @song) %></h1>
+<h1><%= @song.title %></h1>
+
+<% if @song.artist.nil? %> 
+	Artist Not Found: <%= link_to "Add Artist", edit_song_path(@song) %> 
+<% else %> 
+	Artist: <%= link_to display_artist(@song), artist_path(@song.artist) %>
+
+	<br/><br/>
+	<%= link_to "All Songs", artist_songs_path(@song.artist) %>
+<% end %> 
 
 
-<%= link_to "All Songs", artist_songs_path %>
