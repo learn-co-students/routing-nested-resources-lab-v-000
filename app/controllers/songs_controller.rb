@@ -16,11 +16,31 @@ class SongsController < ApplicationController
   end
 
   def show
-    @song = Song.find(params[:id])
-    if @song.artist = nil
-      redirect_to artist_songs_path, alert: "Artist Not Found"
-    else
-      redirect_to songs_path(:id)  
+    if params[:artist_id]
+      #it makes sense why :artist_id is the params by following the code: 
+      #    In song#show, the helper display_artist is called. It's available to all classes bec it's in a module
+      #    #display_artist makes an add artist link to show up if there's no artist
+      #    and a link to the artist name with a path of artist_songs_path with the @song instance, established in the show action
+      #    in SongsController. And in the scope of Song, a @song instance knows the artist by :artist_id 
+      #don't forget: you can start off code in a block for an action with an if statement
+      @artist = Artist.find_by(id: params[:artist_id])
+      @song = @artist.songs.find_by(id: params[:id] )
+      
+      #??? the artist can be found as an instance of the artist where the user input (params) is a value of the id hash?
+      
+      if @song.nil?
+      
+          #you can call #nil as a method
+    
+        redirect_to artist_songs_path(@artist), alert: "Song Not Found"
+      #you don't ALWAYS need an else/elsif!
+      #you don't need to redirect it to the show path because it's already on that path!!
+      
+      end        
+    else @song = Song.find(params[:id])
+    
+      # params is not just for input here ! It's for telling Rails what to retrieve, too!
+
     end
   end
 

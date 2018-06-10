@@ -1,4 +1,21 @@
 <h1><%= link_to @song.title, song_path(@song) %></h1>
+
+<%# A note about routes: the song instance on the song_path connects to this route at the very end of the routes, which can only be shown
+in #show because "song" is singular:
+
+song GET    /songs/:id(.:format)                         songs#show
+                 PATCH  /songs/:id(.:format)                         songs#update
+                 PUT    /songs/:id(.:format)                         songs#update
+                 DELETE /songs/:id(.:format)                         songs#destroy %>
+
 <h3> by <%= display_artist(@song) %></h3>
 
+<%# module ArtistsHelper
+  def display_artist(song)
+    song.artist.nil? ? link_to("Add Artist", edit_song_path(song)) : link_to(song.artist_name, artist_path(song.artist))
+  end
+end %>
+
 <%= link_to "All Songs", songs_path %>
+
+
