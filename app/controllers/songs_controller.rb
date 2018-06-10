@@ -36,7 +36,7 @@ class SongsController < ApplicationController
       
           #you can call #nil as a method
     
-        redirect_to artist_songs_path(@artist), alert: "Song Not Found"
+        redirect_to artist_songs_path(@artist), alert: "Song not found"
       #you don't ALWAYS need an else/elsif!
       #you don't need to redirect it to the show path because it's already on that path!!
       
