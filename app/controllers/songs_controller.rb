@@ -2,10 +2,10 @@ class SongsController < ApplicationController
 require 'pry'
   def index
     if params[:artist_id]
+      # artist does not exist
       if Artist.find_by(id: params[:artist_id]) == nil
-        flash[:alert] = "Artist not found"
-
-        redirect_to artists_path
+        # redirect to index of all artists and alert
+        redirect_to artists_path, alert: = "Artist not found"
       else
         @songs = Artist.find(params[:artist_id]).songs
       end
@@ -16,13 +16,12 @@ require 'pry'
 
   def show
     if params[:id]
+      # song does not exist
       if Song.find_by(id: params[:id]) == nil
-        flash[:alert] = "Song not found"
-
-        redirect_to artist_songs_path(params[:artist_id])
+        # redirect to index of artist's songs
+        redirect_to artist_songs_path(params[:artist_id]), alert: = "Song not found"
       else
         @song = Song.find(params[:id])
-        # redirects to artists songs when artist song not found
       end
     end
   end
