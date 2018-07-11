@@ -12,6 +12,7 @@ group :development, :test do
   gem 'capybara'
   gem 'rspec-rails'
   gem 'shoulda'
+  gem 'pry-rails'
 end
 
 group :development do
