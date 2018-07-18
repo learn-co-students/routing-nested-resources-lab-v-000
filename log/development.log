@@ -686,3 +686,29 @@ Processing by ArtistsController#show as HTML
   [1m[35mSong Load (0.3ms)[0m  SELECT "songs".* FROM "songs" WHERE "songs"."artist_id" = ?  [["artist_id", 1]]
   Rendered artists/show.html.erb within layouts/application (63.9ms)
 Completed 200 OK in 77ms (Views: 70.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/artists/1" for 148.77.25.226 at 2018-07-18 18:59:35 +0000
+Cannot render console from 148.77.25.226! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ArtistsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArtist Load (0.1ms)[0m  [1mSELECT  "artists".* FROM "artists" WHERE "artists"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mSong Load (0.1ms)[0m  SELECT "songs".* FROM "songs" WHERE "songs"."artist_id" = ?  [["artist_id", 1]]
+  Rendered artists/show.html.erb within layouts/application (7.0ms)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.2ms)
+
+ActionView::Template::Error (No route matches {:action=>"show", :artist_id=>#<Song id: 1, title: "Mr. Brightside", created_at: "2016-01-30 16:34:10", updated_at: "2016-01-30 16:34:10", artist_id: 1>, :controller=>"songs", :id=>nil} missing required keys: [:id]):
+    1: <h1><%= @artist.name %></h1>
+    2: <ul>
+    3:   <% @artist.songs.each do |song| %>
+    4:     <li><%= link_to song.title, artist_song_path(song) %></li>
+    5:   <% end %>
+    6: </ul>
+  app/views/artists/show.html.erb:4:in `block in _app_views_artists_show_html_erb__1334126637927670285_69835299689100'
+  app/views/artists/show.html.erb:3:in `_app_views_artists_show_html_erb__1334126637927670285_69835299689100'
+
+
+  Rendered /usr/local/rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.1ms)
+  Rendered /usr/local/rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.4ms)
+  Rendered /usr/local/rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /usr/local/rvm/gems/ruby-2.3.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (43.5ms)
