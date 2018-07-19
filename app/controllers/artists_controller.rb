@@ -1,6 +1,9 @@
 class ArtistsController < ApplicationController
   def index
     @artists = Artist.all
+   if !params[:artist].blank?
+     @songs = Artist.find_by(params[:artist]).songs
+   end
   end
 
   def show
