@@ -28,9 +28,11 @@ class SongsController < ApplicationController
     end
   end
 
+
   def new
     @song = Song.new
   end
+  
 
   def create
     @song = Song.new(song_params)
