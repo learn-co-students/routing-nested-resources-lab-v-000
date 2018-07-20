@@ -12,7 +12,7 @@ class SongsController < ApplicationController
   end
 
   def show
-    @song = Post.find(params[:id])
+    @song = Song.find(params[:id])
   end
 
 
