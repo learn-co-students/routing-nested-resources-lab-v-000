@@ -1,13 +1,6 @@
-Rails.application.routes.draw do
-
+Rails.application.routes.draw do  
   resources :artists do
-  # resources :artists, shallow: true do
-    # nested resource for songs
-    resources :songs, only: [:show, :index]
+    resources :songs, only: [:index, :show] # nested resource for songs
   end
-
   resources :songs
-
-  root 'song#index'
-
- end
+end
