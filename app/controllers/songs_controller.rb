@@ -7,7 +7,7 @@ class SongsController < ApplicationController
         redirect_to artist_path
       end
     else
-      @songs = Post.all
+      @songs = Song.all
     end
   end
 
