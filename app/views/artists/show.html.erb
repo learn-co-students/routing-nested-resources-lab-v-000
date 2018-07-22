@@ -1,6 +1,12 @@
+<% if !flash.empty? %>
+  <% flash.each do |k,v| %>
+    <%= content_tag :div, v, class: "flash #{k}" %>
+  <% end %>
+<% end %>
+
 <h1><%= @artist.name %></h1>
 <ul>
   <% @artist.songs.each do |song| %>
-    <li><%= song.title %></li>
+    <li><%= link_to song.title, artist_song_path(@artist, song) %></li>
   <% end %>
 </ul>
