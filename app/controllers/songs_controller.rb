@@ -1,7 +1,8 @@
+require 'pry'
 class SongsController < ApplicationController
   def index
     if params[:artist_id]
-      @songs = Song.find(params[:artist_id]).songs
+      @songs = Song.where(:artist_id => params[:artist_id])
       if @songs.count == 0
         flash = { alert: "Artist not found." }
         redirect to artists_path
