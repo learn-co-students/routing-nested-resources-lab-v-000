@@ -1,6 +1,12 @@
 <h1>Artists</h1>
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
 <ul>
   <% @artists.each do |artist| %>
-    <li><%= link_to artist.name, artist_path(artist) %></li>
+    <li>
+      <%= link_to artist.name, artist_path(artist) %> -
+      <%= link_to "Songs", artist_songs_path(artist_id) %>
+    </li>
   <% end %>
 </ul>
