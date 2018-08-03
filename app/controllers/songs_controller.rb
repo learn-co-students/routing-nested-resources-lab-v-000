@@ -1,10 +1,27 @@
+require 'pry'
+
 class SongsController < ApplicationController
   def index
-    @songs = Song.all
+    if params[:artist_id] && Artist.find_by(id: params[:artist_id]) == nil 
+      #if we are accessing all songs via artist routing but no artist found 
+      flash[:alert] = "Artist not found"
+      redirect_to artists_path 
+    elsif params[:artist_id] 
+      #if we are accessing songs via an artist route   
+      @songs = Artist.find_by(params[:artist_id]).songs 
+    else
+      #if we are just accessing songs, not via an artist route  
+      @songs = Song.all
+    end 
   end
-
+  
   def show
-    @song = Song.find(params[:id])
+    if @song = Song.find_by(id: params[:id]) !=nil 
+      @song = Song.find_by(id: params[:id])
+    else 
+      flash[:alert] = "Song not found."
+      redirect_to artist_songs_path
+    end
   end
 
   def new
