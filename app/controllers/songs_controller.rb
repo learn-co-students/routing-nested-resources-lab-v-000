@@ -1,14 +1,31 @@
 class SongsController < ApplicationController
   def index
-    @songs = Song.all
+
+    if params[:artist_id]
+      @artist = Artist.find_by(id: params[:artist_id])
+#params[:author_id] coming from? Rails provides it for us through #the nested route
+#Rails takes the parent resource's name and appends _id to it for a #nice, predictable way to find the parent resource's ID.
+      if @artist.nil?
+        redirect_to artists_path, alert: "Artist not founded"
+      else
+        @songs = @artist.songs
+      end
+    else
+      @songs = Song.all
+    end
   end
+
 
   def show
-    @song = Song.find(params[:id])
-  end
-
-  def new
-    @song = Song.new
+    if params[:artist_id]
+      @artist = Artist.find_by(id: params[:artist_id])
+      @song = @artist.songs.find_by(id: params[:id])
+        if @song.nil?
+          redirect_to artist_songs_path(@artist), alert: "Song not found."
+        end
+    else
+      @song = Song.find(params[:id])
+    end
   end
 
   def create
@@ -50,4 +67,3 @@ class SongsController < ApplicationController
     params.require(:song).permit(:title, :artist_name)
   end
 end
-
