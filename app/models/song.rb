@@ -9,4 +9,8 @@ class Song < ActiveRecord::Base
     artist = Artist.find_or_create_by(name: name)
     self.artist = artist
   end
+
+  def self.songs_by_artist (artist_id)
+    Song.where(:artist_id => artist_id)
+  end
 end
