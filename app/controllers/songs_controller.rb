@@ -1,12 +1,16 @@
+require 'rack-flash'
 class SongsController < ApplicationController
+    use Rack::Flash
+    enable :sessions
 
   def index
     if params[:artist_id]
-      if !Artist.find(params[:artist_id])
-        redirect_to artists_path
+      @artist = Artist.find_by(id: params[:artist_id])
+      if @artist
+        @songs = @artist.songs
       else
-     @songs = Artist.find(params[:artist_id]).songs
-   end
+        redirect_to artists_path
+      end
    else
      @songs = Song.all
    end
@@ -19,10 +23,13 @@ class SongsController < ApplicationController
 
 
   def show
-    @song = Song.find(params[:id])
-    if !@song.artist
-      #redirect_to artist_songs_path
+    @song = Song.find_by(id: params[:id])
+    if !@song
+      flash[:message] = "Successfully created song."
+      redirect_to artist_songs_path
     end
+
+
   end
 
   def new
