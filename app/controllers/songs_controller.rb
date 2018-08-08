@@ -1,10 +1,35 @@
+require 'rack-flash'
 class SongsController < ApplicationController
+
+
   def index
-    @songs = Song.all
-  end
+    if params[:artist_id]
+      @artist = Artist.find_by(id: params[:artist_id])
+      if @artist
+        @songs = @artist.songs
+      else
+        flash[:alert] = "Artist not found"
+        redirect_to artists_path
+      end
+   else
+     @songs = Song.all
+   end
+
+
+ end
+  #   redirect_to artists_path
+
+
+
 
   def show
-    @song = Song.find(params[:id])
+    @song = Song.find_by(id: params[:id])
+    if !@song
+      flash[:alert] = "Song not found"
+      redirect_to artist_songs_path
+    end
+
+
   end
 
   def new
@@ -50,4 +75,3 @@ class SongsController < ApplicationController
     params.require(:song).permit(:title, :artist_name)
   end
 end
-
