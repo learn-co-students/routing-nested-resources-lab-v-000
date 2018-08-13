@@ -32,6 +32,7 @@ RSpec.describe SongsController do
 
     it "redirects to artists songs when artist song not found" do
       get :show, id: 12345, artist_id: @artist.id
+      # to get set_flash to work below, need a piece of code for Shoulda gem to work.
       expect(controller).to set_flash[:alert]
       expect(response).to redirect_to artist_songs_path(@artist)
     end
