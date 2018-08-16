@@ -6,6 +6,7 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'jbuilder'
 gem 'sdoc'
+# gem 'rack-flash3'
 
 group :development, :test do
   gem 'pry'
