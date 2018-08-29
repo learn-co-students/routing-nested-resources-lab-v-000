@@ -1,9 +1,6 @@
-<h1>Create an Artist</h1>
-
-<%= form_for @artist  do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <br />
-
-  <%= f.submit %>
-<% end %>
+<h1><%= @artist.name %></h1>
+<ul>
+  <% @artist.songs.each do |song| %>
+    <li><%= link_to song.title, artist_song_path(@artist, song) %></li>
+  <% end %>
+</ul>
