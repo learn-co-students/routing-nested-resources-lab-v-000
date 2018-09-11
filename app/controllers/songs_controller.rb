@@ -19,7 +19,7 @@ class SongsController < ApplicationController
     if @song
       render :show
     else
-      flash[:alert] = "Song not found."
+      flash[:alert] = "You're stuck here!"
       redirect_to artist_songs_path(params[:artist_id])
     end
   end
