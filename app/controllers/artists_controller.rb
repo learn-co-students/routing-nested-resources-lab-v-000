@@ -1,6 +1,10 @@
 class ArtistsController < ApplicationController
   def index
+    if params[:artist_id]
+      @artist = Artist.find(params[:artist_id])
+    else
     @artists = Artist.all
+    end
   end
 
   def show
