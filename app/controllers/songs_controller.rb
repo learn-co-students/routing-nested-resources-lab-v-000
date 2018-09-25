@@ -1,6 +1,9 @@
 class SongsController < ApplicationController
   def index
-    @songs = Song.all
+      @songs = Artist.find(params[:artist_id]).songs
+    rescue ActiveRecord::RecordNotFound
+      flash[:notice] = "ID not found"
+      redirect_to artists_path
   end
 
   def show
@@ -50,4 +53,3 @@ class SongsController < ApplicationController
     params.require(:song).permit(:title, :artist_name)
   end
 end
-
