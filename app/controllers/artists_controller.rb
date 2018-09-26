@@ -4,6 +4,7 @@ class ArtistsController < ApplicationController
   end
 
   def show
+
     @artist = Artist.find(params[:id])
   end
 
@@ -24,6 +25,7 @@ class ArtistsController < ApplicationController
   def edit
     @artist = Artist.find(params[:id])
   end
+  
 
   def update
     @artist = Artist.find(params[:id])
