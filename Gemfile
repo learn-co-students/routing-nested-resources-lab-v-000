@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'thor', '0.19.1'
 gem 'rails', '4.2.5'
 gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
