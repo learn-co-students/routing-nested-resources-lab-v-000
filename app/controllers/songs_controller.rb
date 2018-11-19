@@ -2,9 +2,9 @@ class SongsController < ApplicationController
   # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
-    binding.pry
     if params[:artist_id]
     begin
+      # binding.pry
       @songs = Artist.find(params[:artist_id]).songs
     rescue ActiveRecord::RecordNotFound
       flash[:notice] = "Artist not found."
