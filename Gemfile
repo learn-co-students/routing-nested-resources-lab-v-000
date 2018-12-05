@@ -7,6 +7,7 @@ gem 'uglifier'
 gem 'jbuilder'
 gem 'sdoc', group: :doc
 
+
 group :development, :test do
   gem 'pry'
   gem 'capybara'
