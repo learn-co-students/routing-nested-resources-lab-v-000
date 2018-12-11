@@ -1,6 +1,13 @@
 class SongsController < ApplicationController
+# rescue_from ActiveRecord::RecordNotFound, with: :redirect_to_songs
+
   def index
-    @songs = Song.all
+    if params[:artist_id] 
+      @songs = Artist.find_by(id: params[:artist_id]).songs
+          redirect_to artists_path
+    else
+      @songs = Song.all
+    end
   end
 
   def show
@@ -44,10 +51,13 @@ class SongsController < ApplicationController
     redirect_to songs_path
   end
 
+  # def redirect_to_songs
+  #  redirect_to artists_path, alert: 'User not found'
+  # end
+
   private
 
   def song_params
     params.require(:song).permit(:title, :artist_name)
   end
 end
-
