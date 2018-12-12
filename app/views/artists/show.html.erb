@@ -1,6 +1,9 @@
 <h1><%= @artist.name %></h1>
+<% if flash[:alert] %>
+  <%= flash[:alert] = "Song not found" %>
+<% end %>
 <ul>
   <% @artist.songs.each do |song| %>
-    <li><%= song.title %></li>
+    <li><%= link_to song.title, artist_song_path(@artist, song) %></li>
   <% end %>
 </ul>
