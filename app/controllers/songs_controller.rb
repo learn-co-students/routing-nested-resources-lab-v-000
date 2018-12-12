@@ -2,9 +2,13 @@ class SongsController < ApplicationController
 # rescue_from ActiveRecord::RecordNotFound, with: :redirect_to_songs
 
   def index
-    if params[:artist_id] 
-      @songs = Artist.find_by(id: params[:artist_id]).songs
-          redirect_to artists_path
+    if params[:artist_id]
+      if Artist.find_by(id: params[:artist_id])
+        @songs = Artist.find_by(id: params[:artist_id]).songs
+      else
+        flash[:error] = "Artist not found"
+        redirect_to artists_path
+      end
     else
       @songs = Song.all
     end
