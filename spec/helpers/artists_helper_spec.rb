@@ -9,6 +9,13 @@ RSpec.describe ArtistsHelper, type: :helper do
     @song = @artist.songs.create!(title: "The Grid")
   end
 
+  Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+
   subject { helper }
 
   it { should respond_to(:display_artist).with(1).argument }
