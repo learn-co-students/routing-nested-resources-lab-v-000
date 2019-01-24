@@ -1,5 +1,4 @@
 # Nested Resource Routing Lab
-
 ## Objectives
 
 1. Write nested routes
