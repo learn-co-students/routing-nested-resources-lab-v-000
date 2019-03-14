@@ -6,8 +6,8 @@ class ArtistsController < ApplicationController
 
   def show
     @artist = Artist.find(params[:id])
-    binding.pry
-    @song = params[:song_id]
+    # binding.pry
+    # @song = params[:song_id]
   end
 
   def new

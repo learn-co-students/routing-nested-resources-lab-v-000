@@ -1,10 +1,37 @@
 class SongsController < ApplicationController
   def index
-    @songs = Song.all
+
+  # could be that artist id is there, but no such artist exists. or
+  # could be the artist is there to be found but it's not being found
+
+    if params[:artist_id]
+      if Artist.find_by_id(params[:artist_id])
+        @songs = Artist.find_by_id(params[:artist_id]).songs
+
+      else
+        redirect_to artists_path
+      end
+    else
+      @songs = Song.all
+    end
   end
 
   def show
     @song = Song.find(params[:id])
+    
+  end
+
+  def artist_show
+    if Song.find(params[:id])
+      @song = Song.find(params[:id])
+      binding.pry
+
+    else
+      binding.pry
+      flash[:alert] = "Song not found."
+      redirect_to artist_songs_path
+    end
+
   end
 
   def new
@@ -50,4 +77,3 @@ class SongsController < ApplicationController
     params.require(:song).permit(:title, :artist_name)
   end
 end
-
