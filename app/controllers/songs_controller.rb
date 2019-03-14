@@ -1,4 +1,6 @@
 class SongsController < ApplicationController
+
+
   def index
 
   # could be that artist id is there, but no such artist exists. or
@@ -9,6 +11,7 @@ class SongsController < ApplicationController
         @songs = Artist.find_by_id(params[:artist_id]).songs
 
       else
+        flash[:alert] = "Artist not found."
         redirect_to artists_path
       end
     else
@@ -16,18 +19,19 @@ class SongsController < ApplicationController
     end
   end
 
+  # def show
+  #   @song = Song.find(params[:id])
+  #
+  # end
+
+# binding.pry
   def show
-    @song = Song.find(params[:id])
-    
-  end
-
-  def artist_show
-    if Song.find(params[:id])
-      @song = Song.find(params[:id])
-      binding.pry
-
+    # binding.pry
+    if Song.find_by_id(params[:id])
+      @song = Song.find_by_id(params[:id])
+      # binding.pry
     else
-      binding.pry
+      # binding.pry
       flash[:alert] = "Song not found."
       redirect_to artist_songs_path
     end
