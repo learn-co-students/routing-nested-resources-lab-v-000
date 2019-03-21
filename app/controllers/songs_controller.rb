@@ -12,19 +12,23 @@ class SongsController < ApplicationController
     end
   end
 
+  # bookmark
+  # compare https://github.com/ronsala/modification-nested-routes-reading-v-000/blob/master/app/controllers/posts_controller.rb
   def show
     @song = Song.find(params[:id])
-    # if params[:artist_id]
-    #   if Artist.find_by(id: params[:artist_id])
-    #     @songs = Artist.find_by(id: params[:artist_id]).songs
-    #   else
-    #     flash[:alert] = "Artist not found."
-    #     redirect_to artist_songs_path(@artist)
-    #   end
-    # else
-    #   @songs = Song.all
-    # end
-    # if params
+    if params[:artist_id]
+      artist = Artist.find_by
+      if Artist.find_by(id: params[:artist_id])
+        @songs = Artist.find_by(id: params[:artist_id]).songs
+      else
+        flash[:alert] = "Artist not found."
+        redirect_to artist_songs_path(@artist)
+      end
+    else
+      @songs = Song.all
+    end
+
+
   end
 
   def new
