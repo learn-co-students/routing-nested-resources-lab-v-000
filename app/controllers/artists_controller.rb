@@ -4,7 +4,9 @@ class ArtistsController < ApplicationController
   end
 
   def show
-    @artist = Artist.find(params[:id])
+    binding.pry
+    @artist = Artist.find_by(params[:id])
+    redirect_to if @artist.nil?
   end
 
   def new

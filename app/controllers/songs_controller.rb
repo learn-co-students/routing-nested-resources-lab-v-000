@@ -12,8 +12,6 @@ class SongsController < ApplicationController
     end
   end
 
-  # bookmark
-  # compare https://github.com/ronsala/modification-nested-routes-reading-v-000/blob/master/app/controllers/posts_controller.rb
   def show
     if params[:artist_id]
       artist = Artist.find_by(id: params[:artist_id])
