@@ -15,9 +15,8 @@ class SongsController < ApplicationController
   # bookmark
   # compare https://github.com/ronsala/modification-nested-routes-reading-v-000/blob/master/app/controllers/posts_controller.rb
   def show
-    binding.pry
     if params[:artist_id]
-      artist = Artist.find(id: params[:artist_id])
+      artist = Artist.find_by(id: params[:artist_id])
       if artist.nil?
         redirect_to artists_path, alert = "Artist not found."
       else
