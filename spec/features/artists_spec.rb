@@ -7,13 +7,13 @@ describe "artists", type: :feature do
     @song = @artist.songs.create!(title: "The Grid")
   end
 
-  describe "GET /artists" do
-    it "links to artists songs path" do
-      visit artists_path
-      expect(page).to have_link(@artist.name, href: artist_songs_path(@artist))
-    end
+  #describe "GET /artists" do
+    #it "links to artists songs path" do
+    #  visit artists_path
+      #expect(page).to have_link(@artist.name, href: artist_songs_path(@artist))
+    #end
 
-  end
+  #end
 
   describe "GET /artists/id" do
     it "links to artists song path" do
