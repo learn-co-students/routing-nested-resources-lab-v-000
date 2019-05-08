@@ -12,7 +12,6 @@ class SongsController < ApplicationController
     end
   end
 
-  # TODO: Push this code and log test error
   def show
     if params[:artist_id]
       @artist = Artist.find_by(id: params[:artist_id])
