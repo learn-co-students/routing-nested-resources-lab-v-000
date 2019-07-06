@@ -1,8 +1,9 @@
 class SongsController < ApplicationController
   
   def index  
-    if params[:artist_id] && find_artist
-      @songs = Artist.find_artist.songs
+    if Artist.exists?(params[:artist_id])
+      @artist = Artist.find(params[:artist_id])
+      @songs = @artist.songs
     elsif params[:artist_id]
       flash[:alert] = "Artist not found"
       redirect_to artists_path, status: 301
@@ -61,9 +62,5 @@ class SongsController < ApplicationController
 
   def song_params
     params.require(:song).permit(:title, :artist_name)
-  end
-
-  def find_artist
-    Artist.where(id: params[:artist_id])
   end
 end
