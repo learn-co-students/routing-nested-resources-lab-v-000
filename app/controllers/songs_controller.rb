@@ -1,7 +1,7 @@
 class SongsController < ApplicationController
   
   def index  
-    if params[:artist] && find_artist
+    if params[:artist_id] && find_artist
       @songs = Artist.find_artist.songs
     elsif params[:artist_id]
       flash[:alert] = "Artist not found"
@@ -15,7 +15,6 @@ class SongsController < ApplicationController
     if Song.exists?(params[:id])
       @song = Song.find(params[:id])
     else
-      binding.pry
       flash[:alert] = "Song not found"
       redirect_to artist_songs_path(params[:artist_id]), status: 301
     end
