@@ -3,6 +3,8 @@ class ArtistsController < ApplicationController
     @artists = Artist.all
   end
 
+  #Update the artists show view to list each song for that artist, and use the new nested resource route helper to link each song
+  # to its corresponding show page.
   def show
     @artist = Artist.find(params[:id])
   end

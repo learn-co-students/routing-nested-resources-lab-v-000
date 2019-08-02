@@ -14,6 +14,7 @@ RSpec.describe SongsController do
     it "redirects when artist not found" do
       get :index, params: { artist_id: "abc" }
       expect(response).to redirect_to artists_path
+
     end
 
     it 'returns 200 when just index with no artist_id' do
