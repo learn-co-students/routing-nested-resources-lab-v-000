@@ -9,7 +9,7 @@ describe "songs", type:  :feature do
 
   context "when nested under artists" do
     describe "/artists/:artist_id/songs" do
-      it "displays the songs with valid artist" do
+     it "displays the songs with valid artist" do
         visit artist_songs_path(@artist)
         expect(page).to have_text(@song.title)
       end
