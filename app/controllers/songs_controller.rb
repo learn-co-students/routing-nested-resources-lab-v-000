@@ -2,12 +2,11 @@ require 'rack-flash'
 
 class SongsController < ApplicationController
   def index
-    
-
     if params[:artist_id]
-      if params[:artist_id].to_i == Integer
-        @songs = Artist.find(params[:artist_id]).songs
+      if @artist = Artist.find_by(id: params[:artist_id])
+        @songs = @artist.songs
       else
+        flash[:not_found] = "Artist not found"
         redirect_to artists_path
       end
     else
