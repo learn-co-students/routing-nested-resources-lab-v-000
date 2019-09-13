@@ -19,10 +19,12 @@ class SongsController < ApplicationController
       @artist = Artist.find_by(id: params[:artist_id])
       if Artist.find_by(id: params[:artist_id])
         @song = @artist.songs.find_by(id: params[:id]) #/artists/1/songs/12345
-        binding.pry
         if @song == nil 
+          #this spec test /artists/:artist_id/songs/:id
+            #displays the song
+            #redirects to /artists/id/songs with invalid song
           flash[:alert] = "Song not found"
-          #redirect_to artist_songs_path(params[:artist_id])
+          #redirect_to artist_songs_path(params[:artist_id]) this won't work.
           redirect_to artist_songs_path(@artist)
         end
       else
