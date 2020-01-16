@@ -1,10 +1,45 @@
 class SongsController < ApplicationController
   def index
-    @songs = Song.all
+    if params[:artist_id]
+      begin # I need that keyword, for the call to #rescue to work.
+        artist = Artist.find(params[:artist_id])
+      rescue ActiveRecord::RecordNotFound
+        flash[:alert] = "Artist not found"
+        redirect_to artists_path
+        return # I can use this keyword, or the commented-out #else statement; either will work.
+      end      
+      # else
+      #   @songs = artist.songs
+      # end
+      
+      @songs = artist.songs
+
+      # This doesn't work yet:
+      # find_artist_or_redirect_with_error_msg
+      # @songs = @artist.songs
+    else
+      @songs = Song.all
+    end
   end
 
   def show
-    @song = Song.find(params[:id])
+    if params[:artist_id]
+      artist = Artist.find_by_id(params[:artist_id])
+
+      if artist
+        @song = artist.songs.find_by_id(params[:id])
+
+        if !@song
+          flash[:alert] = "Song not found"
+          redirect_to artist_songs_path(artist)
+        end
+      else
+        # Another way to use flash messages:
+        redirect_to artists_path, alert: "Artist not found"
+      end
+    else
+      @song = Song.find(params[:id])
+    end
   end
 
   def new
@@ -46,8 +81,17 @@ class SongsController < ApplicationController
 
   private
 
-  def song_params
-    params.require(:song).permit(:title, :artist_name)
-  end
+    def song_params
+      params.require(:song).permit(:title, :artist_name)
+    end
+
+    def find_artist_or_redirect_with_error_msg
+      @artist = Artist.find_by_id(params[:artist_id])
+
+      if !@artist
+        flash[:alert] = "Artist not found"
+        redirect_to artists_path # This doesn't work, for some reason; I need to play around with it.
+      end
+    end
 end
 

@@ -5,8 +5,8 @@ class Song < ActiveRecord::Base
     self.try(:artist).try(:name)
   end
 
-  def artist_name=(name)
-    artist = Artist.find_or_create_by(name: name)
+  def artist_name=(name) # Suggested edit below. Open a PR for this; it prevents an artist with a name of "" from being saved.
+    artist = Artist.find_or_create_by(name: name) unless name.blank?
     self.artist = artist
   end
 end
