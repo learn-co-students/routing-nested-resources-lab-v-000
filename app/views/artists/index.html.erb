@@ -1,6 +1,23 @@
+
+<!-- new code -->
+<% if flash[:not_found] %>
+  <p><%= flash[:not_found] %></p>
+<% end %>
+
+
 <h1>Artists</h1>
 <ul>
   <% @artists.each do |artist| %>
-    <li><%= link_to artist.name, artist_path(artist) %></li>
+
+    <!-- deleted code -->
+    <!-- <li><#%= link_to artist.name, artist_path(artist) %></li> -->
+
+    <!--
+    Update the artists index view to use the new nested resource route
+    URL helper to link to the index of all songs by that artist.
+    -->
+    <!-- new code -->
+    <li><%= link_to artist.name, artist_songs_path(artist) %></li>
+
   <% end %>
 </ul>
