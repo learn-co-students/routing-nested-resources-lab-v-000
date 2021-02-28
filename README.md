@@ -21,11 +21,11 @@ The base models, controllers, views, and other files have been provided. There a
 
 Remember to `rake db:seed` to set up a starter song library!
 
-1. Create nested resource routes to show all songs for an artist (`/artists/1/songs`) and individual songs for that artist (`/artists/1/songs/1`). Restrict the nested songs routes to `index` and `show` actions only.
-2. Update the artists `index` view to use the new nested resource route URL helper to link to the index of all songs by that artist.
-3. Update the artists `show` view to list each song for that artist, and use the new nested resource route helper to link each song to its corresponding `show` page.
-4. Update the `songs_controller` to allow the `songs#index` and `songs#show` actions to handle a valid song for the artist.
-5. In the `songs#index` action, if the artist can't be found, redirect to the `index` of artists, and set a `flash[:alert]` of "Artist not found."
+X1. Create nested resource routes to show all songs for an artist (`/artists/1/songs`) and individual songs for that artist (`/artists/1/songs/1`). Restrict the nested songs routes to `index` and `show` actions only.
+X2. Update the artists `index` view to use the new nested resource route URL helper to link to the index of all songs by that artist.
+X3. Update the artists `show` view to list each song for that artist, and use the new nested resource route helper to link each song to its corresponding `show` page.
+X4. Update the `songs_controller` to allow the `songs#index` and `songs#show` actions to handle a valid song for the artist.
+X5. In the `songs#index` action, if the artist can't be found, redirect to the `index` of artists, and set a `flash[:alert]` of "Artist not found."
 6. In the `songs#show` action, if the song can't be found for a given artist, redirect to the `index` of the artist's songs and set a
 `flash[:alert]` of "Song not found."
 7. Make sure all tests pass; then, party down!
